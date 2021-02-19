@@ -1,0 +1,30 @@
+
+
+
+
+@font-face {
+    font-family: 'FuturaLight';
+    src: url('fonts/FuturaLight.otf') format('opentype'),
+    url('fonts/FuturaLight.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'FuturaMedium';
+    src: url('fonts/FuturaMedium.otf') format('opentype'),
+    url('fonts/FuturaMedium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'BaskervilleBold';
+    src: url('fonts/Bask_old_bold.ttf') format('truetype');
+}
+
+
+#HomePage {
+
+}
+
+
+
+
+
+
