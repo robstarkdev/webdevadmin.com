@@ -112,6 +112,13 @@ function PicBox(props){
 
 function Item(props){
 
+
+    function handleSkillClick(evt){
+
+        props.shiftLeft(evt.currentTarget.id);
+
+    }
+
     const color_bckgrnd_hover = 'lightblue';
     const color_bckgrnd = 'lightgrey';
     const logo_styles = {
@@ -121,7 +128,7 @@ function Item(props){
     }
 
     return (
-        <div id={props.item.skill_id} css={css`
+        <a id={props.item.skill_id} css={css`
                   width: 100%;
                   flex: 1 0 auto;
                   height: 40px;
@@ -144,20 +151,26 @@ function Item(props){
                   align-items: center;
                   
                   
-                `}>
+                `} onClick={handleSkillClick}>
 
             <img src={props.item.logo_url} style={logo_styles} alt=""/>
                 {props.item.tech_type}
 
-        </div>
+        </a>
     );
 }
 
 function AllItems(props){
 
+
     return (
         skill_items.map(function(item){
-            return <Item key={item.skill_id} item={item} />;
+            return <Item key={item.skill_id} item={item}
+                         center_box_location={props.center_box_location}
+                         shiftLeft={props.shiftLeft}
+                         current_location={props.current_location}
+
+                    />;
         })
     );
 }
@@ -176,7 +189,11 @@ function ContactDetailsBox(props){
                   align-items: flex-start;
                 `}>
 
-                <AllItems />
+                <AllItems
+                    center_box_location={props.center_box_location}
+                    shiftLeft={props.shiftLeft}
+                    current_location={props.current_location}
+                />
 
             </div>
     );
@@ -199,48 +216,143 @@ function CenterStartBlock(props) {
                 `}>
 
             <PicBox />
-            <ContactDetailsBox />
+            <ContactDetailsBox
+                center_box_location={props.center_box_location}
+                shiftLeft={props.shiftLeft}
+                current_location={props.current_location}
+
+            />
+
+
+
+
+
+        </div>
+    );
+}
+
+/**
+
+ center_box_location={this.state.center_box_location}
+ shift_left={this.shiftLeft}
+ current_location={this.state.current_location}
+
+ */
+
+function FullSkillBox(props){
+    let visibility;
+    if(props.full_box_open === true){
+        visibility = 'flex';
+    }else{
+        visibility = 'none';
+    }
+
+    return (
+
+        <div css={css`
+                  flex: 1 1 auto;
+                  height: 100%;
+                  font-size: 18px;
+                  border: 4px solid dodgerblue;
+                  margin-left: 30px;
+                  
+                  display: ${visibility};
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                `}>
+
+
+            hi
+
+
         </div>
     );
 }
 
 
-const homeStyles = {
-
-    width: "100%",
-    height: "100%",
-    paddingLeft: "3px",
-    display: "flex",
-    flexdirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center"
-};
-
-
 class HomePage extends React.Component {
 
+
     render() {
+
+        const homeStyles = {
+
+            width: "100%",
+            height: "100%",
+            paddingLeft: "30px",
+            display: "flex",
+            flexdirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: this.state.center_box_location,
+            alignItems: "center"
+        };
 
         if(this.state.center_box_location === "left"){
 
             homeStyles.justifyContent = "flex-start";
+        }else{
+            homeStyles.justifyContent = "center";
         }
 
 
         return (
             <div id="HomePage" style={homeStyles}>
 
-                <CenterStartBlock />
+                <CenterStartBlock
+                    center_box_location={this.state.center_box_location}
+                    shiftLeft={this.shiftLeft}
+                    current_location={this.state.current_location}
+
+                />
+
+                <FullSkillBox
+                    center_box_location={this.state.center_box_location}
+                    shiftLeft={this.shiftLeft}
+                    current_location={this.state.current_location}
+                    full_box_open={this.state.full_box_open}
+                    displayFullSkillbox={this.displayFullSkillbox}
+                />
 
             </div>
         );
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            center_box_location: "center",
+            current_location: "center",
+            full_box_open: false,
+            returned_date: ""
+        };
+        this.updateFormState = this.updateFormState.bind(this);
+        this.updateSingleStateVar = this.updateSingleStateVar.bind(this);
+        this.shiftLeft = this.shiftLeft.bind(this);
+        this.displayFullSkillbox= this.displayFullSkillbox.bind(this);
+
+    }
+
+    displayFullSkillbox(skill_item){
+
+        this.updateFormState('full_box_open', true);
+
+    }
+
     shiftLeft(skill_item){
         // first check location of box
 
+        console.log(skill_item);
         // if already left, don't move it
+
+        if(skill_item === "1"){
+            this.openInNewTab("https://youtube.com");
+
+        }else{
+            this.updateFormState('center_box_location', "left");
+            this.displayFullSkillbox(skill_item);
+        }
+
 
         // if this is a "fancyreact" link type, shift left
 
@@ -251,17 +363,10 @@ class HomePage extends React.Component {
         // a database
 
     }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            center_box_location: "left",
-            returned_date: ""
-        };
-        this.updateFormState = this.updateFormState.bind(this);
-        this.updateSingleStateVar = this.updateSingleStateVar.bind(this);
+    openInNewTab(url) {
+        const win = window.open(url, '_blank');
+        win.focus();
     }
-
 
     updateFormState(name, val) {
         this.setState(
