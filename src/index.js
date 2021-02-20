@@ -4,12 +4,30 @@ import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import { css, jsx } from '@emotion/react';
 // import { css, cx } from '@emotion/css';
+import axios from 'axios';
+import htmlParser from 'html-react-parser';
+
 
 import './css/cssHomePage.css';
 
 import img_hammer_wrench from './images/hammer_wrench.png';
 import contact_logo from './images/square_contact_logo_2021.png';
 
+
+async function getFullBoxContent(url){
+
+    try {
+        let res = await axios.get(url);
+
+        if(res.data){
+            console.log(res.data);
+        }
+
+    }catch(error){
+        console.log("CATCH BLOCK SAYS: " + error.message);
+    }
+
+}
 
 window.skill_items = [
     {
@@ -26,7 +44,7 @@ window.skill_items = [
         tech_type: "React",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/react_logo_transp_backgrnd.png",
         link_type: "fancyreact"
     }
     ,
@@ -53,7 +71,7 @@ window.skill_items = [
         tech_type: "PHP",
         link_text: "coding examples etc",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/php_logo_transp_backgrnd.png",
         link_type: "fancyreact"
     },
 
@@ -119,7 +137,7 @@ function Item(props){
 
     }
 
-    const color_bckgrnd_hover = 'lightblue';
+    const color_bckgrnd_hover = 'whitesmoke';
     const color_bckgrnd = 'lightgrey';
     const logo_styles = {
         height: "28px",
@@ -231,13 +249,6 @@ function CenterStartBlock(props) {
     );
 }
 
-/**
-
- center_box_location={this.state.center_box_location}
- shift_left={this.shiftLeft}
- current_location={this.state.current_location}
-
- */
 
 function FullSkillBox(props){
     let visibility;
@@ -257,14 +268,14 @@ function FullSkillBox(props){
                   margin-left: 30px;
                   
                   display: ${visibility};
-                  flex-direction: column;
+                  flex-direction: row;
                   justify-content: center;
                   align-items: center;
                 `}>
 
+            {htmlParser(props.full_box_html_content)}
 
-            hi
-
+            {props.full_box_html_content}
 
         </div>
     );
@@ -312,6 +323,7 @@ class HomePage extends React.Component {
                     current_location={this.state.current_location}
                     full_box_open={this.state.full_box_open}
                     displayFullSkillbox={this.displayFullSkillbox}
+                    full_box_html_content={this.state.full_box_html_content}
                 />
 
             </div>
@@ -324,6 +336,7 @@ class HomePage extends React.Component {
             center_box_location: "center",
             current_location: "center",
             full_box_open: false,
+            full_box_html_content: "",
             returned_date: ""
         };
         this.updateFormState = this.updateFormState.bind(this);
@@ -336,6 +349,20 @@ class HomePage extends React.Component {
     displayFullSkillbox(skill_item){
 
         this.updateFormState('full_box_open', true);
+
+        // turn on spinner
+
+        axios.get('php.html')
+            .then(res => {
+                console.log(res.data);
+                this.updateFormState('full_box_html_content', res.data);
+
+                // turn off spinner
+
+            }).catch(err=> {
+                console.log(err.message)
+        });
+
 
     }
 
@@ -353,14 +380,6 @@ class HomePage extends React.Component {
             this.displayFullSkillbox(skill_item);
         }
 
-
-        // if this is a "fancyreact" link type, shift left
-
-        // make call to method and pass the skill_item as
-        // parameter, this other method will display
-        // all of the relevent info in a large box to
-        // the right with skill info, maybe get it from
-        // a database
 
     }
     openInNewTab(url) {
@@ -392,6 +411,6 @@ class HomePage extends React.Component {
 
 
 
-ReactDom.render(<HomePage />, document.querySelector('body'));
+ReactDom.render(<HomePage />, document.querySelector('#root'));
 
 
