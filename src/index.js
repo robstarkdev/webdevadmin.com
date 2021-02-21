@@ -28,101 +28,100 @@ async function getFullBoxContent(url){
     }
 
 }
-
+// window.skill_items
 window.skill_items = [
     {
-        skill_id: 1,
         tech_type: "View My Developer Videos",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/youtube_logo_transp_backgrnd.png",
-        link_type: "simple"
+        link_type: "external",
+        content_path: "none"
     }
     ,
-    {
-        skill_id: 2,
+     {
         tech_type: "React",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/react_logo_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgreact.html"
     }
     ,
     {
-        skill_id: 3,
         tech_type: "Vanilla Javascript & jQuery",
         link_text: "coding examples etc",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_javascript_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgvanilla.html"
     },
     {
-        skill_id: 4,
         tech_type: "HTML/CSS",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_html5_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pghtmlcss.html"
     }
     ,
     {
-        skill_id: 10,
         tech_type: "MySQL/MS SQL Server",
         link_text: "example sites",
         link_url: "https://google.com",
-        // logo_url: "src/images/skill_logos/logo_mysql_transp_backgrnd.png",
         logo_url: "src/images/skill_logos/logo_sql_transpbackgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgsql.html"
     }
     ,
 
     {
-        skill_id: 5,
         tech_type: "PHP",
         link_text: "coding examples etc",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/php_logo_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgphp.html"
     },
 
 
     {
-        skill_id: 6,
         tech_type: "Node JS",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgnode.html"
     }
     ,
     {
-        skill_id: 7,
         tech_type: "System Administration",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_sysadmin_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgsysadmin.html"
     }
     ,
 
     {
-        skill_id: 8,
         tech_type: "Chinese",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_chinese_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgchinese.html"
     }
     ,
 
 
     {
-        skill_id: 9,
         tech_type: "Spanish",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_spanish_transp_backgrnd.png",
-        link_type: "fancyreact"
+        link_type: "internal",
+        content_path: "pgspanish.html"
     }
 ];
 
@@ -145,7 +144,10 @@ function Item(props){
 
     function handleSkillClick(evt){
 
-        props.shiftLeft(evt.currentTarget.id);
+        let skill_arr_index = evt.currentTarget.id;
+
+        props.shiftLeft(skill_arr_index);
+        alert(skill_arr_index)
 
     }
 
@@ -158,7 +160,7 @@ function Item(props){
     }
 
     return (
-        <a id={props.item.skill_id} css={css`
+        <a id={props.id} css={css`
                   width: 100%;
                   flex: 1 0 auto;
                   height: 40px;
@@ -194,8 +196,8 @@ function AllItems(props){
 
 
     return (
-        skill_items.map(function(item){
-            return <Item key={item.skill_id} item={item}
+        skill_items.map(function(item, arr_index){
+            return <Item key={arr_index} item={item} id={arr_index}
                          center_box_location={props.center_box_location}
                          shiftLeft={props.shiftLeft}
                          current_location={props.current_location}
@@ -356,38 +358,29 @@ class HomePage extends React.Component {
 
     }
 
-    displayFullSkillbox(skill_item){
-
-        this.updateFormState('full_box_open', true);
-
-        // turn on spinner
-
-        axios.get('php.html')
-            .then(res => {
-                console.log(res.data);
-                this.updateFormState('full_box_html_content', res.data);
-
-                // turn off spinner
-
-            }).catch(err=> {
-                console.log(err.message)
-        });
-
-
-    }
-
-    shiftLeft(skill_item){
+    shiftLeft(item_index){
         // first check location of box
 
-        console.log(skill_item);
-        // if already left, don't move it
 
-        if(skill_item === "1"){
-            this.openInNewTab("https://youtube.com");
+        // if already left, don't move it
+        /**
+         {
+        tech_type: "Node JS",
+        link_text: "example sites",
+        link_url: "https://google.com",
+        logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
+        link_type: "internal"
+    }
+         */
+
+
+
+        if(window.skill_items[item_index].link_type === "external"){
+            this.openInNewTab(window.skill_items[item_index].link_url);
 
         }else{
             this.updateFormState('center_box_location', "left");
-            this.displayFullSkillbox(skill_item);
+            this.displayFullSkillbox(item_index);
         }
 
 
@@ -395,6 +388,28 @@ class HomePage extends React.Component {
     openInNewTab(url) {
         const win = window.open(url, '_blank');
         win.focus();
+    }
+
+    displayFullSkillbox(item_index){
+
+        this.updateFormState('full_box_open', true);
+
+        // turn on spinner
+
+        let path = window.skill_items[item_index].content_path;
+
+        axios.get(path)
+            .then(res => {
+                console.log(res.data);
+                this.updateFormState('full_box_html_content', res.data);
+
+                // turn off spinner
+
+            }).catch(err=> {
+            console.log(err.message)
+        });
+
+
     }
 
     updateFormState(name, val) {
