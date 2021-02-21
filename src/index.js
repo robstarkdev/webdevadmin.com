@@ -33,7 +33,7 @@ window.skill_items = [
     {
         tech_type: "View My Developer Videos",
         link_text: "example sites",
-        link_url: "https://google.com",
+        link_url: "https://www.youtube.com/c/BecomeaWebDesignerandDeveloper/videos",
         logo_url: "src/images/skill_logos/youtube_logo_transp_backgrnd.png",
         link_type: "external",
         content_path: "none"
@@ -137,22 +137,13 @@ function PicBox(props){
     );
 }
 
-
-
 function Item(props){
 
-
     function handleSkillClick(evt){
-
-        let skill_arr_index = evt.currentTarget.id;
-
-        props.shiftLeft(skill_arr_index);
-        alert(skill_arr_index)
-
+        props.shiftLeft(evt.currentTarget.id);
     }
 
     const color_bckgrnd_hover = 'whitesmoke';
-    const color_bckgrnd = 'lightgrey';
     const logo_styles = {
         height: "28px",
         width: "auto",
@@ -164,7 +155,6 @@ function Item(props){
                   width: 100%;
                   flex: 1 0 auto;
                   height: 40px;
-                  //background-color: ${color_bckgrnd};
                   font-size: 16px;
                   padding-left: 15px;
                   cursor: pointer;
@@ -172,17 +162,15 @@ function Item(props){
                   border: 1px solid black;
                   border-radius: 25px;
                   margin-bottom: 5px;
-                  &:hover {
-                    background-color: ${color_bckgrnd_hover};
-                  }
-          
                   display: flex;
                   flex-direction: row;
                   flex-wrap: nowrap;
                   justify-content: flex-start;
                   align-items: center;
-                  
-                  
+                   &:hover {
+                    background-color: ${color_bckgrnd_hover};
+                  }
+          
                 `} onClick={handleSkillClick}>
 
             <img src={props.item.logo_url} style={logo_styles} alt=""/>
@@ -194,18 +182,17 @@ function Item(props){
 
 function AllItems(props){
 
-
     return (
         skill_items.map(function(item, arr_index){
             return <Item key={arr_index} item={item} id={arr_index}
                          center_box_location={props.center_box_location}
                          shiftLeft={props.shiftLeft}
                          current_location={props.current_location}
-
                     />;
         })
     );
 }
+
 
 
 function ContactDetailsBox(props){
@@ -253,7 +240,6 @@ function CenterStartBlock(props) {
                 center_box_location={props.center_box_location}
                 shiftLeft={props.shiftLeft}
                 current_location={props.current_location}
-
             />
         </div>
     );
@@ -276,18 +262,15 @@ function FullSkillBox(props){
                   height: 100%;
                   font-size: 18px;
                   border: 10px solid dodgerblue;
-                  //margin-left: 30px;
                   position: relative;
-                  
-                  
                   display: ${visibility};
                   flex-direction: column;
                   justify-content: center;
                   align-items: center;
                 `}>
 
+            <img id="detailbox_logo" src={window.skill_items[props.current_skill_index].logo_url} />
             {htmlParser(props.full_box_html_content)}
-
 
         </div>
     );
@@ -296,14 +279,11 @@ function FullSkillBox(props){
 
 class HomePage extends React.Component {
 
-
     render() {
 
         const homeStyles = {
-
             width: "100%",
             height: "100%",
-            // paddingLeft: "30px",
             display: "flex",
             flexdirection: "row",
             flexWrap: "nowrap",
@@ -312,7 +292,6 @@ class HomePage extends React.Component {
         };
 
         if(this.state.center_box_location === "left"){
-
             homeStyles.justifyContent = "flex-start";
         }else{
             homeStyles.justifyContent = "center";
@@ -336,6 +315,7 @@ class HomePage extends React.Component {
                     full_box_open={this.state.full_box_open}
                     displayFullSkillbox={this.displayFullSkillbox}
                     full_box_html_content={this.state.full_box_html_content}
+                    current_skill_index={this.state.current_skill_index}
                 />
 
             </div>
@@ -349,7 +329,8 @@ class HomePage extends React.Component {
             current_location: "center",
             full_box_open: false,
             full_box_html_content: "",
-            returned_date: ""
+            returned_date: "",
+            current_skill_index: 0
         };
         this.updateFormState = this.updateFormState.bind(this);
         this.updateSingleStateVar = this.updateSingleStateVar.bind(this);
@@ -359,21 +340,6 @@ class HomePage extends React.Component {
     }
 
     shiftLeft(item_index){
-        // first check location of box
-
-
-        // if already left, don't move it
-        /**
-         {
-        tech_type: "Node JS",
-        link_text: "example sites",
-        link_url: "https://google.com",
-        logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
-        link_type: "internal"
-    }
-         */
-
-
 
         if(window.skill_items[item_index].link_type === "external"){
             this.openInNewTab(window.skill_items[item_index].link_url);
@@ -382,9 +348,8 @@ class HomePage extends React.Component {
             this.updateFormState('center_box_location', "left");
             this.displayFullSkillbox(item_index);
         }
-
-
     }
+
     openInNewTab(url) {
         const win = window.open(url, '_blank');
         win.focus();
@@ -393,6 +358,7 @@ class HomePage extends React.Component {
     displayFullSkillbox(item_index){
 
         this.updateFormState('full_box_open', true);
+        this.updateFormState("current_skill_index", item_index)
 
         // turn on spinner
 
