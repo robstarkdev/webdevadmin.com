@@ -50,10 +50,10 @@ window.skill_items = [
     ,
     {
         skill_id: 3,
-        tech_type: "Javascript/jQuery",
+        tech_type: "Vanilla Javascript & jQuery",
         link_text: "coding examples etc",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/logo_javascript_transp_backgrnd.png",
         link_type: "fancyreact"
     },
     {
@@ -61,7 +61,17 @@ window.skill_items = [
         tech_type: "HTML/CSS",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/logo_html5_transp_backgrnd.png",
+        link_type: "fancyreact"
+    }
+    ,
+    {
+        skill_id: 10,
+        tech_type: "MySQL/MS SQL Server",
+        link_text: "example sites",
+        link_url: "https://google.com",
+        // logo_url: "src/images/skill_logos/logo_mysql_transp_backgrnd.png",
+        logo_url: "src/images/skill_logos/logo_sql_transpbackgrnd.png",
         link_type: "fancyreact"
     }
     ,
@@ -78,10 +88,10 @@ window.skill_items = [
 
     {
         skill_id: 6,
-        tech_type: "Node",
+        tech_type: "Node JS",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
         link_type: "fancyreact"
     }
     ,
@@ -90,7 +100,7 @@ window.skill_items = [
         tech_type: "System Administration",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/unnamed.jpg",
+        logo_url: "src/images/skill_logos/logo_sysadmin_transp_backgrnd.png",
         link_type: "fancyreact"
     }
     ,
@@ -100,6 +110,7 @@ window.skill_items = [
         tech_type: "Chinese",
         link_text: "example sites",
         link_url: "https://google.com",
+        logo_url: "src/images/skill_logos/logo_chinese_transp_backgrnd.png",
         link_type: "fancyreact"
     }
     ,
@@ -110,6 +121,7 @@ window.skill_items = [
         tech_type: "Spanish",
         link_text: "example sites",
         link_url: "https://google.com",
+        logo_url: "src/images/skill_logos/logo_spanish_transp_backgrnd.png",
         link_type: "fancyreact"
     }
 ];
@@ -224,9 +236,10 @@ function CenterStartBlock(props) {
     return (
 
         <div css={css`
-                  width: 340px;
+                  width: 23%;
                   height: auto;
                   font-size: 18px;
+                  padding: 15px;
                   display: flex;
                   flex-direction: column;
                   justify-content: center;
@@ -240,11 +253,6 @@ function CenterStartBlock(props) {
                 current_location={props.current_location}
 
             />
-
-
-
-
-
         </div>
     );
 }
@@ -261,21 +269,23 @@ function FullSkillBox(props){
     return (
 
         <div css={css`
-                  flex: 1 1 auto;
+                  flex: 1 1 77%;
+                  width: 77%;
                   height: 100%;
                   font-size: 18px;
-                  border: 4px solid dodgerblue;
-                  margin-left: 30px;
+                  border: 10px solid dodgerblue;
+                  //margin-left: 30px;
+                  position: relative;
+                  
                   
                   display: ${visibility};
-                  flex-direction: row;
+                  flex-direction: column;
                   justify-content: center;
                   align-items: center;
                 `}>
 
             {htmlParser(props.full_box_html_content)}
 
-            {props.full_box_html_content}
 
         </div>
     );
@@ -291,7 +301,7 @@ class HomePage extends React.Component {
 
             width: "100%",
             height: "100%",
-            paddingLeft: "30px",
+            // paddingLeft: "30px",
             display: "flex",
             flexdirection: "row",
             flexWrap: "nowrap",
