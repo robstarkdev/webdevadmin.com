@@ -31,6 +31,16 @@ async function getFullBoxContent(url){
 // window.skill_items
 window.skill_items = [
     {
+        tech_type: "Summary",
+        link_text: "example sites",
+        link_url: "",
+        logo_url: "src/images/skill_logos/summary_logo.png",
+        link_type: "internal",
+        content_path: "pgsummary.html"
+    }
+    ,
+
+    {
         tech_type: "View My Developer Videos",
         link_text: "example sites",
         link_url: "https://www.youtube.com/c/BecomeaWebDesignerandDeveloper/videos",
@@ -116,7 +126,7 @@ window.skill_items = [
 
 
     {
-        tech_type: "Spanish",
+        tech_type: "Spanish/Portuguese",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_spanish_transp_backgrnd.png",
@@ -262,14 +272,20 @@ function FullSkillBox(props){
                   height: 100%;
                   font-size: 18px;
                   border: 10px solid dodgerblue;
+                  
                   position: relative;
                   display: ${visibility};
                   flex-direction: column;
-                  justify-content: center;
+                  justify-content: flex-start;
+                  padding-top: 40px;
                   align-items: center;
+                  overflow: scroll;
                 `}>
 
-            <img id="detailbox_logo" src={window.skill_items[props.current_skill_index].logo_url} />
+            <div className="create_fixed_position">
+                <img className="detailbox_logo" src={window.skill_items[props.current_skill_index].logo_url} />
+            </div>
+
             {htmlParser(props.full_box_html_content)}
 
         </div>
