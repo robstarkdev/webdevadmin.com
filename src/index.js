@@ -1,34 +1,13 @@
 
-
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import { css, jsx } from '@emotion/react';
-// import { css, cx } from '@emotion/css';
 import axios from 'axios';
 import htmlParser from 'html-react-parser';
-
-
 import './css/cssHomePage.css';
-
-import img_hammer_wrench from './images/hammer_wrench.png';
 import contact_logo from './images/square_contact_logo_2021.png';
 
 
-async function getFullBoxContent(url){
-
-    try {
-        let res = await axios.get(url);
-
-        if(res.data){
-            console.log(res.data);
-        }
-
-    }catch(error){
-        console.log("CATCH BLOCK SAYS: " + error.message);
-    }
-
-}
-// window.skill_items
 window.skill_items = [
     {
         tech_type: "Summary",
@@ -49,7 +28,7 @@ window.skill_items = [
         content_path: "none"
     }
     ,
-     {
+    {
         tech_type: "React",
         link_text: "example sites",
         link_url: "https://google.com",
@@ -109,6 +88,15 @@ window.skill_items = [
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_sysadmin_transp_backgrnd.png",
+        link_type: "internal",
+        content_path: "pgsysadmin.html"
+    }
+    ,
+    {
+        tech_type: ".NET Framework (2007-2009)",
+        link_text: "example sites",
+        link_url: "https://google.com",
+        logo_url: "src/images/skill_logos/logo_microsoft.png",
         link_type: "internal",
         content_path: "pgsysadmin.html"
     }
@@ -203,7 +191,22 @@ function AllItems(props){
     );
 }
 
+// may use this version of the function later,
+// so I'll leave it here for now
+async function getFullBoxContent(url){
 
+    try {
+        let res = await axios.get(url);
+
+        if(res.data){
+            console.log(res.data);
+        }
+
+    }catch(error){
+        console.log("CATCH BLOCK SAYS: " + error.message);
+    }
+
+}
 
 function ContactDetailsBox(props){
 
@@ -419,5 +422,3 @@ class HomePage extends React.Component {
 
 
 ReactDom.render(<HomePage />, document.querySelector('#root'));
-
-
