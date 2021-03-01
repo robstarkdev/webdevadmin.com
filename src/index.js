@@ -29,7 +29,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "React",
+        tech_type: "React (2+ Yrs., spare time)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/react_logo_transp_backgrnd.png",
@@ -38,7 +38,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "Vanilla Javascript & jQuery",
+        tech_type: "Javascript & jQuery (7+ Yrs.)",
         link_text: "coding examples etc",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_javascript_transp_backgrnd.png",
@@ -46,7 +46,7 @@ window.skill_items = [
         content_path: "pgvanilla.html"
     },
     {
-        tech_type: "HTML/CSS",
+        tech_type: "HTML/CSS (8+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_html5_transp_backgrnd.png",
@@ -55,7 +55,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "MySQL/MS SQL Server",
+        tech_type: "MySQL/MS SQL Server (6+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_sql_transpbackgrnd.png",
@@ -65,7 +65,7 @@ window.skill_items = [
     ,
 
     {
-        tech_type: "PHP",
+        tech_type: "PHP (6+ Yrs.)",
         link_text: "coding examples etc",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/php_logo_transp_backgrnd.png",
@@ -75,7 +75,7 @@ window.skill_items = [
 
 
     {
-        tech_type: "Node JS",
+        tech_type: "Node JS (2+ Yrs., spare time)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
@@ -84,7 +84,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "System Administration",
+        tech_type: "System Administration (7+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_sysadmin_transp_backgrnd.png",
@@ -93,12 +93,12 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: ".NET Framework (2007-2009)",
+        tech_type: ".NET Framework (3+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_microsoft.png",
         link_type: "internal",
-        content_path: "pgsysadmin.html"
+        content_path: "pgdotnet.html"
     }
     ,
 
