@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Webdevadmin.com - Home</title>
-
-
-    <link rel="icon" href="src/images/hammer_wrench.png">
-
-    <style>
-        * {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Webdevadmin.com - Home</title><link rel="icon" href="src/images/hammer_wrench.png"><style>* {
             box-sizing: border-box;
         }
 
@@ -24,14 +14,65 @@
             justify-content: center;
             align-items: center;
         }
-    </style>
+        #root {
+            width: 100%;
+            height: 100%;
+        }
 
-</head>
-<body>
+        .create_fixed_position {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+        }
+
+        .detailbox_logo {
+            position: fixed;
+
+            height: 70px;
+            width: auto;
+        }
 
 
+        .text_div {
+            max-width: 65%;
+            font-family: FuturaLight, sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+            margin-bottom: 30px;
 
+            flex: 0 0 auto;
 
+        }
 
-<script src="vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_react-dom_i-52bf09.bundle.js"></script><script src="index.bundle.js"></script></body>
-</html>
+        iframe {
+            flex: 0 0 auto;
+            margin-bottom: 30px;
+        }
+
+        .basic_image_styles {
+            flex: 0 0 auto;
+        }
+
+        .site_thumbs_div {
+            width: 100%;
+            flex: 0 0 auto;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 20px;
+
+            margin-bottom: 50px;
+        }
+        .site_thumb {
+            width: 320px;
+            height: 180px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 8px rgba(0,0,0,.5);
+            cursor: pointer;
+            transition: all, 0.2s;
+        }
+        .site_thumb:hover {
+            box-shadow: 5px 5px 8px rgba(0,111,222,.5);
+        }</style></head><body><div id="root"></div><script src="229.bundle.js"></script><script src="701.bundle.js"></script><script src="index.bundle.js"></script></body></html>
