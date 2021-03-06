@@ -29,7 +29,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "React (2+ Yrs., spare time)",
+        tech_type: "React (2+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/react_logo_transp_backgrnd.png",
@@ -75,7 +75,7 @@ window.skill_items = [
 
 
     {
-        tech_type: "Node JS (2+ Yrs., spare time)",
+        tech_type: "Node JS (2+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
