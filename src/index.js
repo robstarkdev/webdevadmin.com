@@ -348,7 +348,7 @@ function FullSkillBox(props){
 
     return (
 
-        <div css={css`
+        <div id="full_skill_box" css={css`
                   z-index: 99;
                   flex: ${flex_properties};
                   width: ${width};
@@ -499,8 +499,7 @@ class HomePage extends React.Component {
     displayFullSkillbox(item_index){
 
         this.updateFormState('full_box_open', true);
-        this.updateFormState("current_skill_index", item_index)
-
+        this.updateFormState("current_skill_index", item_index);
         let path = window.skill_items[item_index].content_path;
 
         axios.get(path)
@@ -508,11 +507,11 @@ class HomePage extends React.Component {
                 console.log(res.data);
                 this.updateFormState('full_box_html_content', res.data);
 
-
             }).catch(err=> {
             console.log(err.message)
         }).finally(()=>{
-            window.scroll({top: 0, left: 0, behavior: 'smooth'});
+            //, behavior: 'smooth'}
+            document.getElementById('full_skill_box').scroll({top: 0, left: 0});
         });
 
 
