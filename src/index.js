@@ -111,8 +111,6 @@ window.skill_items = [
         content_path: "pgchinese.html"
     }
     ,
-
-
     {
         tech_type: "Spanish/Portuguese",
         link_text: "example sites",
@@ -123,22 +121,17 @@ window.skill_items = [
     }
 ];
 
-function PicBox(props){
-    return (
-          <img src={contact_logo} css={css`
-                  width: 100%;
-                  height: auto;
-                  border-radius: 40px;
-                  flex: 0 0 auto;
-                  margin-bottom: 10px;
-                `} />
-    );
-}
+
 
 function Item(props){
 
     function handleSkillClick(evt){
         props.shiftLeft(evt.currentTarget.id);
+    }
+
+    let width = "100%";
+    if(props.display_orientation === "portrait"){
+        width = "85%";
     }
 
     const color_bckgrnd_hover = 'whitesmoke';
@@ -150,7 +143,7 @@ function Item(props){
 
     return (
         <a id={props.id} css={css`
-                  width: 100%;
+                  width: ${width};
                   flex: 1 0 auto;
                   height: 40px;
                   font-size: 16px;
@@ -183,6 +176,7 @@ function AllItems(props){
     return (
         skill_items.map(function(item, arr_index){
             return <Item key={arr_index} item={item} id={arr_index}
+                         display_orientation={props.display_orientation}
                          center_box_location={props.center_box_location}
                          shiftLeft={props.shiftLeft}
                          current_location={props.current_location}
@@ -208,20 +202,27 @@ async function getFullBoxContent(url){
 
 }
 
-function ContactDetailsBox(props){
+function ButtonMenu(props){
+
+    let alignItems = "flex-start";
+    if(props.display_orientation === "portrait"){
+        alignItems = "center";
+    }
 
     return (
             <div css={css`
                   width: 100%;
-                  flex: 1 1 auto;
+                  flex: 0 0 auto;
+                  height: auto;
                   display: flex;
                   flex-direction: column;
                   flex-wrap: nowrap;
                   justify-content: flex-start;
-                  align-items: flex-start;
+                  align-items: ${alignItems};
                 `}>
 
                 <AllItems
+                    display_orientation={props.display_orientation}
                     center_box_location={props.center_box_location}
                     shiftLeft={props.shiftLeft}
                     current_location={props.current_location}
@@ -231,11 +232,38 @@ function ContactDetailsBox(props){
     );
 }
 
+function PicBox(props){
+    return (
 
+        // <div css={css`
+        //           width: 100%;
+        //           height: auto;
+        //           border-radius: 40px;
+        //           flex: 0 0 auto;
+        //           margin-bottom: 10px;
+        //         `}>
+        //
+        //
+        //
+        // </div>
+        <img src={contact_logo} css={css`
+                  //width: 100%;
+                  //height: auto;
+                  width: 375px;
+                  height: 300px;
+                  
+                  border-radius: 40px;
+                  flex: 1 0 auto;
+                 
+                `} />
+
+    );
+}
 
 function CenterStartBlock(props) {
 
     let display = "flex";
+    let justifyContent = "center";
     let isPortrait = props.display_orientation !== "landscape" ;
 
     /// WAIT WAIT ... what is going on here, i'm not asking but telling ... :
@@ -249,7 +277,8 @@ function CenterStartBlock(props) {
     let fontSize = '18px';
 
     if(isPortrait){
-        width = '80%';
+        width = '100%';
+        justifyContent = "flex-start";
         // fontsize neither menu nor skillbox is determined here
         fontSize = '8px';
     }
@@ -259,18 +288,22 @@ function CenterStartBlock(props) {
         <div css={css`
                   width: ${width};
                   height: auto;
+                  //flex: 0 0 auto;
                   font-size: ${fontSize};
                   padding: 15px;
                   display: ${display};
                   flex-direction: column;
-                  justify-content: center;
+                  justify-content: ${justifyContent};
                   align-items: center;
+                  overflow: scroll;
+                  border: 2px solid red;
                 `}>
 
             <PicBox
                 display_orientation={props.display_orientation}
             />
-            <ContactDetailsBox
+            <ButtonMenu
+                display_orientation={props.display_orientation}
                 center_box_location={props.center_box_location}
                 shiftLeft={props.shiftLeft}
                 current_location={props.current_location}
@@ -357,27 +390,26 @@ class HomePage extends React.Component {
 
     render() {
 
-        // let direction = "row";
-        // if(this.state.display_orientation === "portrait"){
-        //     direction = "column";
-        // }
-
         const homeStyles = {
             width: "100%",
             height: "100%",
             display: "flex",
-            flexdirection: "row",
+            flexDirection: "row",
             flexWrap: "nowrap",
             justifyContent: this.state.center_box_location,
-            alignItems: "center"
+            alignItems: "center",
+            overflow: "scroll"
         };
 
-        if(this.state.center_box_location === "left" && !(this.state.display_orientation ==="portrait")){
+        if(this.state.center_box_location === "left" && !(this.state.display_orientation === "portrait")){
             homeStyles.justifyContent = "flex-start";
-        }else{
+        }else if(this.state.center_box_location === "center" && !(this.state.display_orientation === "portrait")){
             homeStyles.justifyContent = "center";
+        }else{
+            // whenever in portrait, we're in here...
+            homeStyles.flexDirection = "column"
+            homeStyles.justifyContent = "flex-start";
         }
-
 
         return (
             <div id="HomePage" style={homeStyles}>
