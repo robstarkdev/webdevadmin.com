@@ -247,10 +247,10 @@ function PicBox(props){
         //
         // </div>
         <img src={contact_logo} css={css`
-                  //width: 100%;
-                  //height: auto;
-                  width: 375px;
-                  height: 300px;
+                  width: 100%;
+                  height: auto;
+                  //width: 375px;
+                  //height: 300px;
                   
                   border-radius: 40px;
                   flex: 1 0 auto;
@@ -279,8 +279,6 @@ function CenterStartBlock(props) {
     if(isPortrait){
         width = '100%';
         justifyContent = "flex-start";
-        // fontsize neither menu nor skillbox is determined here
-        fontSize = '8px';
     }
 
     return (
@@ -296,7 +294,6 @@ function CenterStartBlock(props) {
                   justify-content: ${justifyContent};
                   align-items: center;
                   overflow: scroll;
-                  border: 2px solid red;
                 `}>
 
             <PicBox
@@ -323,9 +320,12 @@ function FullSkillBox(props){
 
     let flex_properties = "1 1 77%";
     let width = "77%";
+    let paddingTop = "40px";
     if(!(props.display_orientation === "landscape")){
         flex_properties = "0 0 100%";
         width = "100%";
+        paddingTop = "80px";
+
     }
 
     let display_close_check = "none";
@@ -355,7 +355,7 @@ function FullSkillBox(props){
                   display: ${visibility};
                   flex-direction: column;
                   justify-content: flex-start;
-                  padding-top: 40px;
+                  padding-top: ${paddingTop};
                   align-items: center;
                   overflow: scroll;
                 `}>
@@ -365,14 +365,18 @@ function FullSkillBox(props){
             </div>
 
             <div css={css`
-                  position: absolute;
-                  right: 10px;
-                  top: 10px;
-                  width: 20px;
-                  height: 20px;
-                  border: 2px solid red;
+                  position: fixed;
+                  right: 20px;
+                  top: 20px;
+                  width: 40px;
+                  height: 40px;
+                  font-size: 35px;
+                  font-family: FuturaLight, sans-serif;
+                  border: 2px solid grey;
                   cursor: pointer;
                   display: ${display_close_check};
+                  justify-content: center;
+                  align-items: center;
                 `} onClick={handleCheckBoxClick}>
 
                 X
