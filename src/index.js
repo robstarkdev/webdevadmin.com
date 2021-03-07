@@ -134,7 +134,7 @@ function Item(props){
     let paddingLeft = "15px";
     if(props.display_orientation === "portrait"){
         width = "87%";
-        fontSize = "14px";
+        fontSize = "15px";
         paddingLeft = "12px";
     }
 
@@ -342,6 +342,7 @@ function FullSkillBox(props){
 
         props.updateFormState("display_center_start_block", "flex");
         props.updateFormState("full_box_open", false);
+
     }
 
 
@@ -360,6 +361,7 @@ function FullSkillBox(props){
                   flex-direction: column;
                   justify-content: flex-start;
                   padding-top: ${paddingTop};
+                  padding-bottom: 25px;
                   align-items: center;
                   overflow: scroll;
                 `}>
@@ -499,8 +501,6 @@ class HomePage extends React.Component {
         this.updateFormState('full_box_open', true);
         this.updateFormState("current_skill_index", item_index)
 
-        // turn on spinner
-
         let path = window.skill_items[item_index].content_path;
 
         axios.get(path)
@@ -508,10 +508,11 @@ class HomePage extends React.Component {
                 console.log(res.data);
                 this.updateFormState('full_box_html_content', res.data);
 
-                // turn off spinner
 
             }).catch(err=> {
             console.log(err.message)
+        }).finally(()=>{
+            window.scroll({top: 0, left: 0, behavior: 'smooth'});
         });
 
 
