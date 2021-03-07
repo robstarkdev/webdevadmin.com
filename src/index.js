@@ -29,7 +29,7 @@ window.skill_items = [
     }
     ,
     {
-        tech_type: "React (2+ Yrs.)",
+        tech_type: "React (2-3 Yrs..)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/react_logo_transp_backgrnd.png",
@@ -75,7 +75,7 @@ window.skill_items = [
 
 
     {
-        tech_type: "Node JS (2+ Yrs.)",
+        tech_type: "Node JS (2-3 Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
         logo_url: "src/images/skill_logos/logo_node_transp_bckgrnd.png",
@@ -235,20 +235,41 @@ function ContactDetailsBox(props){
 
 function CenterStartBlock(props) {
 
+    let display = "flex";
+    let isPortrait = props.display_orientation !== "landscape" ;
+
+    /// WAIT WAIT ... what is going on here, i'm not asking but telling ... :
+    let skillBoxOpen = props.full_box_open === true ;
+
+    if(isPortrait && skillBoxOpen){
+        display = "none";
+    }
+
+    let width = '23%';
+    let fontSize = '18px';
+
+    if(isPortrait){
+        width = '80%';
+        // fontsize neither menu nor skillbox is determined here
+        fontSize = '8px';
+    }
+
     return (
 
         <div css={css`
-                  width: 23%;
+                  width: ${width};
                   height: auto;
-                  font-size: 18px;
+                  font-size: ${fontSize};
                   padding: 15px;
-                  display: flex;
+                  display: ${display};
                   flex-direction: column;
                   justify-content: center;
                   align-items: center;
                 `}>
 
-            <PicBox />
+            <PicBox
+                display_orientation={props.display_orientation}
+            />
             <ContactDetailsBox
                 center_box_location={props.center_box_location}
                 shiftLeft={props.shiftLeft}
@@ -267,11 +288,32 @@ function FullSkillBox(props){
         visibility = 'none';
     }
 
+    let flex_properties = "1 1 77%";
+    let width = "77%";
+    if(!(props.display_orientation === "landscape")){
+        flex_properties = "0 0 100%";
+        width = "100%";
+    }
+
+    let display_close_check = "none";
+    if(props.display_orientation === "portrait" && props.full_box_open === true){
+        display_close_check = "flex";
+    }
+
+
+    function handleCheckBoxClick(evt){
+
+        props.updateFormState("display_center_start_block", "flex");
+        props.updateFormState("full_box_open", false);
+    }
+
+
     return (
 
         <div css={css`
-                  flex: 1 1 77%;
-                  width: 77%;
+                  z-index: 99;
+                  flex: ${flex_properties};
+                  width: ${width};
                   height: 100%;
                   font-size: 18px;
                   border: 10px solid dodgerblue;
@@ -289,6 +331,21 @@ function FullSkillBox(props){
                 <img className="detailbox_logo" src={window.skill_items[props.current_skill_index].logo_url} />
             </div>
 
+            <div css={css`
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  width: 20px;
+                  height: 20px;
+                  border: 2px solid red;
+                  cursor: pointer;
+                  display: ${display_close_check};
+                `} onClick={handleCheckBoxClick}>
+
+                X
+
+            </div>
+
             {htmlParser(props.full_box_html_content)}
 
         </div>
@@ -300,6 +357,11 @@ class HomePage extends React.Component {
 
     render() {
 
+        // let direction = "row";
+        // if(this.state.display_orientation === "portrait"){
+        //     direction = "column";
+        // }
+
         const homeStyles = {
             width: "100%",
             height: "100%",
@@ -310,7 +372,7 @@ class HomePage extends React.Component {
             alignItems: "center"
         };
 
-        if(this.state.center_box_location === "left"){
+        if(this.state.center_box_location === "left" && !(this.state.display_orientation ==="portrait")){
             homeStyles.justifyContent = "flex-start";
         }else{
             homeStyles.justifyContent = "center";
@@ -321,13 +383,21 @@ class HomePage extends React.Component {
             <div id="HomePage" style={homeStyles}>
 
                 <CenterStartBlock
+                    display_center_start_block={this.state.display_center_start_block}
+                    display_skill_block={this.state.display_skill_box}
+                    updateFormState={this.updateFormState}
+                    display_orientation={this.state.display_orientation}
+                    full_box_open={this.state.full_box_open}
                     center_box_location={this.state.center_box_location}
                     shiftLeft={this.shiftLeft}
                     current_location={this.state.current_location}
-
                 />
 
                 <FullSkillBox
+                    display_center_start_block={this.state.display_center_start_block}
+                    display_skill_block={this.state.display_skill_box}
+                    updateFormState={this.updateFormState}
+                    display_orientation={this.state.display_orientation}
                     center_box_location={this.state.center_box_location}
                     shiftLeft={this.shiftLeft}
                     current_location={this.state.current_location}
@@ -343,14 +413,24 @@ class HomePage extends React.Component {
 
     constructor(props) {
         super(props);
+        let orientation = "landscape";
+        let vw = window.innerWidth;
+        if(!(vw > 1000)){
+            // alert("less than 1000");
+            orientation = "portrait";
+        }
         this.state = {
             center_box_location: "center",
             current_location: "center",
             full_box_open: false,
             full_box_html_content: "",
             returned_date: "",
-            current_skill_index: 0
+            current_skill_index: 0,
+            display_orientation: orientation,
+            display_center_start_block: "flex",
+            display_skill_box: "none"
         };
+
         this.updateFormState = this.updateFormState.bind(this);
         this.updateSingleStateVar = this.updateSingleStateVar.bind(this);
         this.shiftLeft = this.shiftLeft.bind(this);
