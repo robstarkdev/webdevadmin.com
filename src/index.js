@@ -130,8 +130,12 @@ function Item(props){
     }
 
     let width = "100%";
+    let fontSize = "16px";
+    let paddingLeft = "15px";
     if(props.display_orientation === "portrait"){
-        width = "85%";
+        width = "87%";
+        fontSize = "14px";
+        paddingLeft = "12px";
     }
 
     const color_bckgrnd_hover = 'whitesmoke';
@@ -146,8 +150,8 @@ function Item(props){
                   width: ${width};
                   flex: 1 0 auto;
                   height: 40px;
-                  font-size: 16px;
-                  padding-left: 15px;
+                  font-size: ${fontSize};
+                  padding-left: ${paddingLeft};
                   cursor: pointer;
                   font-family: FuturaLight, sans-serif;
                   border: 1px solid black;
