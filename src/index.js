@@ -129,13 +129,22 @@ function Item(props){
         props.shiftLeft(evt.currentTarget.id);
     }
 
+
+
     let width = "100%";
     let fontSize = "16px";
     let paddingLeft = "15px";
+    if(props.item.content_path === "pgsql.html"){
+        fontSize = "15px";
+    }
+
     if(props.display_orientation === "portrait"){
         width = "87%";
         fontSize = "15px";
         paddingLeft = "12px";
+        if(props.item.content_path === "pgsql.html"){
+            fontSize = "14px";
+        }
     }
 
     const color_bckgrnd_hover = 'whitesmoke';
@@ -239,28 +248,12 @@ function ButtonMenu(props){
 function PicBox(props){
     return (
 
-        // <div css={css`
-        //           width: 100%;
-        //           height: auto;
-        //           border-radius: 40px;
-        //           flex: 0 0 auto;
-        //           margin-bottom: 10px;
-        //         `}>
-        //
-        //
-        //
-        // </div>
         <img src={contact_logo} css={css`
                   width: 100%;
                   height: auto;
-                  //width: 375px;
-                  //height: 300px;
-                  
                   border-radius: 40px;
                   flex: 1 0 auto;
-                 
                 `} />
-
     );
 }
 
@@ -271,6 +264,8 @@ function CenterStartBlock(props) {
     let isPortrait = props.display_orientation !== "landscape" ;
 
     /// WAIT WAIT ... what is going on here, i'm not asking but telling ... :
+    /// everything is working perfectly, but i haven't gone back and
+    /// figured out why this seems strange ... hmm ok, leave it for now
     let skillBoxOpen = props.full_box_open === true ;
 
     if(isPortrait && skillBoxOpen){
@@ -329,7 +324,6 @@ function FullSkillBox(props){
         flex_properties = "0 0 100%";
         width = "100%";
         paddingTop = "80px";
-
     }
 
     let display_close_check = "none";
@@ -339,12 +333,9 @@ function FullSkillBox(props){
 
 
     function handleCheckBoxClick(evt){
-
         props.updateFormState("display_center_start_block", "flex");
         props.updateFormState("full_box_open", false);
-
     }
-
 
     return (
 
