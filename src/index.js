@@ -129,8 +129,6 @@ function Item(props){
         props.shiftLeft(evt.currentTarget.id);
     }
 
-
-
     let width = "100%";
     let fontSize = "16px";
     let paddingLeft = "15px";
@@ -256,6 +254,9 @@ function PicBox(props){
                 `} />
     );
 }
+
+
+
 
 function CenterStartBlock(props) {
 

@@ -1,0 +1,149 @@
+
+
+
+
+function tc_getDocument($in = []) {
+    $return = ['success' => false, 'error' => 'Unknown exception', 'documents' => null];
+    global $db;
+
+    // Setup the where clause
+    $where = [];
+    $where[] = "Library.Workflow = 'timecard'";
+    $where[] = "Library.User_ID = 0";
+
+    if ( isset($in['mode']) && $in['mode']=='verify' ) {
+      $where[] = "Library.Status = 'unapproved'";
+    } else {
+      $where[] = "Library.Status = 'new'";
+    }
+
+    // But we may add to it!
+
+    if ( isset($in[ 'client' ]) && intval($in[ 'client' ]) ) {
+      $where[] = "Inbox.ClientReference = " . intval($in[ 'client' ]);
+    }
+
+    if ( isset($in[ 'branch' ]) && intval($in[ 'branch' ]) ) {
+      $where[] = "Inbox.Branch = " . intval($in[ 'branch' ]);
+    }
+
+    // Skip to the next, so add id to where clause
+    if ( isset($in[ 'action' ], $in[ 'id' ], $in[ 'docparentid' ]) && $in[ 'action' ] == 'skip' && $in[ 'id' ] > 0 && $in[ 'docparentid' ] > 0) {
+
+      $where[] = "Library.ID != " . intval($in[ 'id' ]) . " AND Library.Parent_ID > " . intval($in[ 'docparentid' ]);
+
+    } elseif ( isset($in[ 'action' ], $in[ 'id' ]) && $in[ 'action' ] == 'back' && $in[ 'id' ] > 0 ) {
+
+        $where[] = "Library.ID != " . intval($in[ 'id' ]) . " AND Library.Parent_ID < " . intval($in[ 'docparentid' ]);
+       // original code that was in here for 'back' action:
+      //$where[] = "\n            And Library.ID < " . intval($in[ 'id' ]);
+
+    } elseif ( isset($in[ 'id' ]) && intval($in[ 'id' ]) ) {
+      // fetch the document by ID so we OVERRIDE the where clause previously built
+      $where = [ "Library.ID = " . intval($in[ 'id' ]) ];
+    }
+
+    $order_by = '';
+
+    if(isset($in[ 'action' ], $in[ 'id' ]) && $in[ 'action' ] == 'back' && $in[ 'id' ] > 0){
+
+        $order_by = "Library.parent_id Desc";
+
+    }else{
+        $order_by = "Inbox.created_at Asc, Library.parent_id Asc";
+    }
+
+
+    $where = "\t    " . join("\n\tAnd ", $where);
+
+    $update = "
+      /* Remove user locks */
+      Update Staffing..Document_Library Set User_ID = 0, User_Date = null Where User_ID = ? Or User_Date < DateAdd(mi,-15,GetUTCDate());
+
+      /* Claim/lock document for user */
+      Update Top(1) Staffing..Document_Library Set
+          User_ID = ?
+        , User_Date = GetUTCDate()
+      Where ID = (
+        Select Top 1
+          Library.id
+        From
+               Staffing..Document_Library Library
+          Join Staffing..Document_Inbox Inbox On Inbox.id = Library.Document_Inbox_ID
+        Where
+          $where
+        Order By
+          $order_by
+      );
+    ";
+
+    //print_r($in);die("<pre>\n$update\n");
+    $db->Execute($update, [$in[ 'user' ], $in[ 'user' ]]);
+
+    $select = "
+      Select Top 1
+          Library.id                As docid
+        , Library.parent_id         As docparentid
+        , Library.document_inbox_id As libinboxid
+        , Parent.content_type
+        , Parent.content_binary
+        , Inbox.id                  As inboxid
+        , Inbox.method
+        , Inbox.meta
+        , Inbox.created_at          As inboxdate
+
+      From
+             Staffing..Document_Library Library
+        Join Staffing..Document_Library Parent On Parent.ID = Library.Parent_ID
+        Join Staffing..Document_Inbox Inbox On Inbox.id = Library.Document_Inbox_ID
+
+      Where
+        Library.User_ID = ?
+
+      Order By
+        Inbox.created_at Asc, Library.parent_id Asc
+    ";
+
+    //echo'<pre>';die($select);
+    $documents = $db->getAssoc($select, [$in[ 'user' ]]);
+    //echo'<pre>';print_r($documents);die();
+    if ( !count($documents) && ( !isset($in['retry']) || ( isset($in['retry']) && $in['retry'] == true ) ) ) {
+      return tc_getDocument([ 'user' => $in['user'], 'client'=> $in['client'], 'branch' => $in['branch'], 'retry' => false ]);
+    }
+
+    foreach ( $documents as $key => $document ) {
+      if ( isset($document[ 'meta' ]) ) {
+        $documents[ $key ][ 'email_base64' ] = base64_encode(json_encode(unserialize($document[ 'meta' ])->email));
+      }
+
+      if ( isset($document[ 'content_binary' ]) ) {
+        $documents[ $key ][ 'content_binary_base64' ] = base64_encode($document[ 'content_binary' ]);
+      }
+
+      unset($documents[ $key ][ 'meta' ]);
+      unset($documents[ $key ][ 'content_binary' ]);
+    }
+    //echo'<pre>';var_dump($documents);die();
+
+    $counts = getNewDocCount();
+    $count = 0;
+    if ( is_array($counts) && count($counts) ) {
+      $count = $counts[0]['CountOf'];
+    }
+    if ( is_array($documents) ) {
+      $return = [ 'success' => true, 'error' => false, 'documents' => $documents, 'count' => $count, 'where' =>
+          $where ];
+    } else {
+      $return = [ 'success' => false, 'error' => $db->ErrorMsg(), 'query' => $select, 'documents' => null, 'count' => $count ];
+    }
+
+    return $return;
+} // function tc_getDocument
+
+
+
+
+
+
+
+

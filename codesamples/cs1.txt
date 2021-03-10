@@ -1,0 +1,47 @@
+
+
+
+
+
+
+// Inside the corporate VPN, the dashboard webpage needs to
+// detect which branch office is making the request, and
+// once the page knows that, it can display branch-specific
+// data on financials, real-time interview data etc.
+
+function get_branch_code_from_ip(){
+
+    $aBranchSubnets = [
+        '10.1.0.' => 110, '10.1.1.' => 110, '10.1.10.' => 110, '10.1.254.' => 110, '10.1.253.' => 110, '10.1.252.' => 110, '10.1.251.' => 110, '10.10.1.' => 110, '10.12.1.' => 110,
+        '10.2.2.' => 120, '10.1.20.' => 120,
+        '10.1.30.' => 130,
+        '10.1.50.' => 150,
+        '10.1.60.' => 160, '10.1.61.' => 160, '10.1.62.',
+        '10.2.10.' => 210, '10.2.20.' => 220, '10.2.30.' => 230,
+        '10.3.10.' => 310, '10.3.254.' => 310, '10.3.20.' => 320, '10.3.30.' => 330,
+        '10.4.10.' => 410, '10.4.20.' => 420,
+        '10.0.0.' => 110
+    ];
+    // default headquarters office
+    $detected_branch = 110;
+
+    if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+        $aSegments = explode('.', $_SERVER['REMOTE_ADDR']);
+        $sSubnet = $aSegments[0].'.'.$aSegments[1].'.'.$aSegments[2].'.';
+        if ( isset($aBranchSubnets[$sSubnet] ) ) {
+            $detected_branch = $aBranchSubnets[$sSubnet];
+        }
+    }
+
+
+    return $detected_branch;
+}
+
+
+
+
+
+
+
+
+
