@@ -12,8 +12,8 @@ module.exports = {
         contact: './src/contact.js'
     },
     output: {
-        filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "./")
+        filename: "[name].[contenthash].bundle.js",
+        path: path.resolve(__dirname, "./build")
     },
     optimization: {
         splitChunks: {
@@ -29,6 +29,10 @@ module.exports = {
 
     plugins:
         [
+            new HtmlWebpackPlugin({
+
+                title: 'Caching'
+            }),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: 'src/index-template.html',
