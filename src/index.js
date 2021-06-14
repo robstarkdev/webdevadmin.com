@@ -13,7 +13,7 @@ window.skill_items = [
         tech_type: "Summary",
         link_text: "example sites",
         link_url: "",
-        logo_url: "./images/skill_logos/summary_logo.png",
+        logo_url: "./images/skill_logos/final/summary_logo.png",
         link_type: "internal",
         content_path: "pgsummary.html"
     }
@@ -23,7 +23,7 @@ window.skill_items = [
         tech_type: "View My Developer Videos",
         link_text: "example sites",
         link_url: "https://www.youtube.com/c/BecomeaWebDesignerandDeveloper/videos",
-        logo_url: "./images/skill_logos/youtube_logo_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/youtube_logo_transp_backgrnd.png",
         link_type: "external",
         content_path: "none"
     }
@@ -32,16 +32,16 @@ window.skill_items = [
         tech_type: "React/React Native (2-3 Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/react_logo_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/react_logo_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "pgreact.html"
+        content_path: "pgreact2.html"
     }
     ,
     {
         tech_type: "Javascript & jQuery (7+ Yrs.)",
         link_text: "coding examples etc",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_javascript_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_javascript_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pgvanilla.html"
     },
@@ -49,7 +49,7 @@ window.skill_items = [
         tech_type: "HTML/CSS (8+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_html5_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_html5_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pghtmlcss2.html"
     }
@@ -58,7 +58,7 @@ window.skill_items = [
         tech_type: "MySQL/MS SQL Server (6+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_sql_transpbackgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_sql_transpbackgrnd.png",
         link_type: "internal",
         content_path: "pgsql.html"
     }
@@ -68,7 +68,7 @@ window.skill_items = [
         tech_type: "PHP (6+ Yrs.)",
         link_text: "coding examples etc",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/php_logo_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/php_logo_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pgphp.html"
     },
@@ -78,7 +78,7 @@ window.skill_items = [
         tech_type: "Node JS (2-3 Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_node_transp_bckgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_node_transp_bckgrnd.png",
         link_type: "internal",
         content_path: "pgnode.html"
     }
@@ -87,16 +87,16 @@ window.skill_items = [
         tech_type: "System Administration (7+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_sysadmin_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_sysadmin_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "./pgsysadmin.html"
+        content_path: "./pgsysadmin4.html"
     }
     ,
     {
         tech_type: ".NET Framework (3+ Yrs.)",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_microsoft.png",
+        logo_url: "./images/skill_logos/final/logo_microsoft.png",
         link_type: "internal",
         content_path: "pgdotnet.html"
     }
@@ -106,7 +106,7 @@ window.skill_items = [
         tech_type: "Chinese",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_chinese_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_chinese_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pgchinese.html"
     }
@@ -115,7 +115,7 @@ window.skill_items = [
         tech_type: "Spanish/Portuguese",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/logo_spanish_transp_backgrnd.png",
+        logo_url: "./images/skill_logos/final/logo_spanish_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pgspanish.html"
     }
