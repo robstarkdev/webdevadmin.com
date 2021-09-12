@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import { css, jsx } from '@emotion/react';
-import axios from 'axios';
 import htmlParser from 'html-react-parser';
 import './css/cssHomePage.css';
 import contact_logo from './images/square_contact_logo_2021.png';
@@ -24,7 +23,7 @@ import logo_wordpress from "./images/skill_logos/final/logoWordpress.png";
 let pgSummary = `
     <div class="text_div" style="margin-top: auto; margin-bottom: auto;">
 
-    <strong>Anything you want to acheive in the browser, or on the server: I can do it.</strong> If you want a "serverless" solution I have used Google Cloud's Firebase and love it. The site you're looking at right now is coming to you from Firebase hosting, and it was built with React. Although, I have mainly used PHP and the .Net framework, I have fallen in love with React and React Native. Over the last 3 years I have been increasingly using <strong>React and React Native</strong> (view a recent iPhone/Android app I created with React Native and published in both App stores:
+    <strong>Anything you want to acheive in the browser, or on the server: I can do it.</strong> If you want a "serverless" solution I have used Google Cloud's Firebase and love it. The site you're looking at right now is coming to you from Firebase hosting, and it was built with React. Over the last 3 years I have been increasingly using <strong>React and React Native</strong> (view a recent iPhone/Android app I created with React Native and published in both App stores:
     <a href="https://www.SpanishFrequencyDictionary.com">www.SpanishFrequencyDictionary.com</a>.)
 
     <br><br>
@@ -128,9 +127,10 @@ let pgVanilla = `
 let pgSql = `
     <div class="text_div" style="margin-top: auto; margin-bottom: auto">
     
-        All of my experience with databases has been with relational databases and "traditional" SQL to interact with MySQL and Microsoft SQL Server.  However, I am more than willing to quickly bone-up on a "NO-SQL" database scheme such as MongoDB in a real hurry if the employer needs it.
+        Most of my experience with databases has been with relational databases and "traditional" SQL to interact with MySQL and Microsoft SQL Server.  However, I have built four (4) projects on Google Cloud's Firebase, and all have used the "No SQL" database Firestore. I also worked on a contract basis for a company (for two months full-time) that used Firebase for the company API. 
         <br>
         <br>
+        Highlights of my database-related experience:
         <ul>
             <li>Creation of Dynamic SQL Queries in PHP by Programatically Constructing the "WHERE" Clause</li>
             <li>Daily Work with 300-400 Distinct Microsoft SQL Server Database Tables Over the Course of 14 months Working for Company with $97 million Yearly Gross Revenue</li>
@@ -153,7 +153,7 @@ let pgPhp = `
     
 <div class="text_div" style="margin-top: auto; margin-bottom: auto">
 
-   In 2014 I began using PHP on a consistent basis. From 2014 to 2018 I built 40+ websites for small businesses in Asia, primarily in Hong Kong and mainland China. From August 2019 to November 2020 I worked for a medium-sized company, which has offices in four states, whose entire API was written in PHP (and javascript/jQuery and some React/Typescript on the front-end).
+   In 2014 I began using PHP on a consistent basis. From 2014 to 2018 I built 40+ websites for small businesses in Asia, primarily in Hong Kong and mainland China. From August 2019 to November 2020 I worked for a medium-sized company, which has offices in four states, whose entire API was written in PHP (and javascript/jQuery and some React/Typescript on the front-end). 
 
    <br><br>
    Over the last seven years I have used PHP to:
@@ -173,7 +173,7 @@ let pgPhp = `
       <li><a href="https://int-AMG.com" target="_blank">www.Int-AMG.com</a></li>
       <li><a href="https://draw2build.net" target="_blank">www.Draw2Build.net</a></li>
       <li><a href="https://chinatextravel.com" target="_blank">www.ChinaTexTravel.com</a></li>
-      <li>Five (5) Years ago I Created a Free Apartment Listing Website that is Now on the First Page of Google for Related Search Terms:<br> <a href="https://apartmentforrentinshenzhen.com" target="_blank">Apartment Site</a></li>
+      <li>Five (5) Years ago I Created a Free Apartment Listing Website that is Now on the First Page of Google for Related Search Terms:<br> <a href="https://apartmentforrentinshenzhen.com" target="_blank">Apartment Site</a>. (The site has about 7000 vistors per month and is actively used to this day.)</li>
    </ul>
 
 </div>
@@ -211,7 +211,7 @@ let pgNode = `
 let pgSysadmin = `
     
     <div class="text_div">
-        Although I've mostly worked with Linux administration, I am extremely keen on the Google Cloud Platform and its Firebase "serverless" suite of products. It makes massive infrastructure and scale available to small and medium-sized businesses at an affordable rate.
+        Although I've mostly worked with Linux administration, I am extremely keen on the Google Cloud Platform and its Firebase "serverless" suite of products. It makes massive infrastructure and scale available to small and medium-sized businesses at an affordable rate. 
     </div>
     
     <div class="site_thumbs_div fb_gcp_images_div">
@@ -290,7 +290,7 @@ let pgHtmlCss = `
     
         <br><br>
     
-        Over the last 12 years, I have created literally hundreds of websites and projects (large and small) using HTML and CSS. As a person who used tables for layout when coding webpages 14 years ago: I know how wonderful <strong>Flexbox</strong> is.
+        Over the last 14 years, I have created literally hundreds of websites and projects (large and small) using HTML and CSS. As a person who used tables for layout when coding webpages 14 years ago: I know how wonderful <strong>Flexbox</strong> is.
     
         <br><br>
         The most complex UI creations in the browser I've made are confidential, and are the property of the last company I worked for. Thus, I can't show them here. 
@@ -370,12 +370,10 @@ let pgWordpress = `
             <li>Theme modification using custom CSS and Javascript</li>
             <li>Helped maintain WordPress site for company with $97 million per year gross revenue.  For 1.2 years (2019-2020) helped employer maintain front-facing WordPress marketing website <a href="https://terrastaffinggroup.com" target="_blank">www.TerraStaffingGroup.com</a>. Most of the development I did for this company, however, was just "pure" PHP and javascript relating to the company API. Please see my resume for details. </li>
             
-          
             <li>Cloudflare configurations for WordPress sites: <a href="https://spryadmin.com" target="_blank">Fast Personal Blog Site</a>  My previous employer, Terra Staffing Group, Inc., made extensive use of Cloudflare to speed up their WordPress site.</li>
         </ul>
         
     </div>
-    
     
     <div class="site_thumbs_div">
     
@@ -489,7 +487,6 @@ window.skill_items = [
         content_path: pgSpanish
     }
 ];
-
 
 function Item(props){
 
@@ -661,7 +658,6 @@ function CenterStartBlock(props) {
     );
 }
 
-
 function FullSkillBox(props){
     let visibility;
     if(props.full_box_open === true){
@@ -739,7 +735,6 @@ function FullSkillBox(props){
         </div>
     );
 }
-
 
 class HomePage extends React.Component {
 
@@ -877,8 +872,6 @@ class HomePage extends React.Component {
     }
 // ... end HomePage component class
 }
-
-
 
 
 ReactDom.render(<HomePage />, document.querySelector('#root'));
