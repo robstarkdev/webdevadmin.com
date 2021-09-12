@@ -6,7 +6,7 @@ import axios from 'axios';
 import htmlParser from 'html-react-parser';
 import './css/cssHomePage.css';
 import contact_logo from './images/square_contact_logo_2021.png';
-
+import logo_chinese from './images/skill_logos/final/logo_chinese_transp_backgrnd.png';
 
 window.skill_items = [
     {
@@ -15,7 +15,7 @@ window.skill_items = [
         link_url: "",
         logo_url: "./images/skill_logos/final/summary_logo.png",
         link_type: "internal",
-        content_path: "pgsummary.html"
+        content_path: "pgsummary2.html"
     }
     ,
 
@@ -34,7 +34,7 @@ window.skill_items = [
         link_url: "https://google.com",
         logo_url: "./images/skill_logos/final/react_logo_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "pgreact2.html"
+        content_path: "pgreact3.html"
     }
     ,
     {
@@ -43,7 +43,7 @@ window.skill_items = [
         link_url: "https://google.com",
         logo_url: "./images/skill_logos/final/logo_javascript_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "pgvanilla.html"
+        content_path: "pgvanilla2.html"
     },
     {
         tech_type: "HTML/CSS (8+ Yrs.)",
@@ -51,7 +51,7 @@ window.skill_items = [
         link_url: "https://google.com",
         logo_url: "./images/skill_logos/final/logo_html5_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "pghtmlcss2.html"
+        content_path: "pghtmlcss3.html"
     }
     ,
     {
@@ -80,7 +80,7 @@ window.skill_items = [
         link_url: "https://google.com",
         logo_url: "./images/skill_logos/final/logo_node_transp_bckgrnd.png",
         link_type: "internal",
-        content_path: "pgnode.html"
+        content_path: "pgnode2.html"
     }
     ,
     {
@@ -89,7 +89,7 @@ window.skill_items = [
         link_url: "https://google.com",
         logo_url: "./images/skill_logos/final/logo_sysadmin_transp_backgrnd.png",
         link_type: "internal",
-        content_path: "./pgsysadmin4.html"
+        content_path: "./pgsysadmin5.html"
     }
     ,
     {
@@ -106,16 +106,16 @@ window.skill_items = [
         tech_type: "Chinese",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/final/logo_chinese_transp_backgrnd.png",
+        logo_url: logo_chinese,
         link_type: "internal",
-        content_path: "pgchinese.html"
+        content_path: "./pgchinese.html"
     }
     ,
     {
         tech_type: "Spanish/Portuguese",
         link_text: "example sites",
         link_url: "https://google.com",
-        logo_url: "./images/skill_logos/final/logo_spanish_transp_backgrnd.png",
+        logo_url: "./webdevadmin.com/build/images/skill_logos/final/logo_spanish_transp_backgrnd.png",
         link_type: "internal",
         content_path: "pgspanish.html"
     }
@@ -147,7 +147,7 @@ function Item(props){
 
     const color_bckgrnd_hover = 'whitesmoke';
     const logo_styles = {
-        height: "28px",
+        height: "25px",
         width: "auto",
         marginRight: "5px"
     }
@@ -156,7 +156,7 @@ function Item(props){
         <a id={props.id} css={css`
                   width: ${width};
                   flex: 1 0 auto;
-                  height: 40px;
+                  height: 34px;
                   font-size: ${fontSize};
                   padding-left: ${paddingLeft};
                   cursor: pointer;
@@ -283,7 +283,7 @@ function CenterStartBlock(props) {
 
     return (
 
-        <div css={css`
+        <div id="center_start_block" css={css`
                   width: ${width};
                   height: auto;
                   //flex: 0 0 auto;
@@ -293,7 +293,11 @@ function CenterStartBlock(props) {
                   flex-direction: column;
                   justify-content: ${justifyContent};
                   align-items: center;
-                  overflow: scroll;
+                  // if it is on a small screen then it is scroll, 
+                  // look to css styles in the 'index-template.html' file
+                  // in src
+                  //overflow: scroll;
+                  overflow: hidden;
                 `}>
 
             <PicBox
@@ -505,8 +509,6 @@ class HomePage extends React.Component {
             //, behavior: 'smooth'}
             document.getElementById('full_skill_box').scroll({top: 0, left: 0});
         });
-
-
     }
 
     updateFormState(name, val) {

@@ -24,6 +24,8 @@
             flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
+
+            overflow: hidden; /* Hide scrollbars */
         }
 
         #root {
@@ -115,6 +117,20 @@
 
         }
 
+        .ondemand {
+            width: 100%;
+            padding: 10px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .ondemand_image {
+            width: 90%;
+            height: auto;
+        }
+
         .strip_downloads {
             justify-content: space-evenly;
         }
@@ -147,6 +163,9 @@
 
         @media screen and (max-width: 900px) {
 
+            #center_start_block {
+                overflow: scroll;
+            }
 
             .strip_downloads {
                 flex-direction: column;
