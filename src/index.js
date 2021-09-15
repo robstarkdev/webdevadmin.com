@@ -238,10 +238,6 @@ function CenterStartBlock(props) {
     let display = "flex";
     let justifyContent = "center";
     let isPortrait = props.display_orientation !== "landscape" ;
-
-    /// WAIT WAIT ... what is going on here, i'm not asking but telling ... :
-    /// everything is working perfectly, but i haven't gone back and
-    /// figured out why this seems strange ... hmm ok, leave it for now
     let skillBoxOpen = props.full_box_open === true ;
 
     if(isPortrait && skillBoxOpen){
