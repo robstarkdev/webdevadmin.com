@@ -40,21 +40,21 @@ window.skill_items = [
         content_path: "none"
     },
     {
-        tech_type: "React/React Native (2-3 Yrs.)",
+        tech_type: "React/React Native",
         link_url: "none",
         logo_url: logo_react,
         link_type: "internal",
         content_path: pages.pgReact
     },
     {
-        tech_type: "Javascript & jQuery (7+ Yrs.)",
+        tech_type: "Javascript & jQuery (10+ Yrs.)",
         link_url: "none",
         logo_url: logo_javascript,
         link_type: "internal",
         content_path: pages.pgVanilla
     },
     {
-        tech_type: "HTML/CSS (8+ Yrs.)",
+        tech_type: "HTML/CSS (10+ Yrs.)",
         link_url: "none",
         logo_url: logo_html_css,
         link_type: "internal",
@@ -75,21 +75,21 @@ window.skill_items = [
         content_path: pages.pgPhp
     },
     {
-        tech_type: "WordPress (2+ Yrs.)",
+        tech_type: "WordPress",
         link_url: "none",
         logo_url: logo_wordpress,
         link_type: "internal",
         content_path: pages.pgWordpress
     },
     {
-        tech_type: "Node JS (2-3 Yrs.)",
+        tech_type: "Node JS",
         link_url: "none",
         logo_url: logo_node,
         link_type: "internal",
         content_path: pages.pgNode
     },
     {
-        tech_type: "System Administration (7+ Yrs.)",
+        tech_type: "System Administration",
         link_url: "none",
         logo_url: logo_sysadmin,
         link_type: "internal",
@@ -474,7 +474,6 @@ class HomePage extends React.Component {
             document.getElementById('full_skill_box').scrollTo(0,0);
         }
         setTimeout(scrollSkillbox,100);
-
     }
 
     updateFormState(name, val) {
@@ -501,3 +500,5 @@ class HomePage extends React.Component {
 
 
 ReactDom.render(<HomePage />, document.querySelector('#root'));
+
+
