@@ -19,9 +19,7 @@ import logo_dotnet from "./images/skill_logos/final/logo_microsoft.png";
 import logo_spanish from "./images/skill_logos/final/logo_spanish_transp_backgrnd.png";
 import logo_wordpress from "./images/skill_logos/final/logoWordpress.png";
 
-
 import * as pages from './pgStrings';
-
 
 window.skill_items = [
     {
